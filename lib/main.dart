@@ -84,10 +84,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         return gridData.indexOf(fromChange) != index;
       },
       onAccept: (fromChange) {
+        var changefromValue = fromChange;
+        var changeToValue = gridData[index];
+        int changeFromIndex = gridData.indexOf(fromChange);
         setState(() {
-          var changefromValue = fromChange;
-          var changeToValue = gridData[index];
-          int changeFromIndex = gridData.indexOf(fromChange);
           gridData[index] = changefromValue;
           gridData[changeFromIndex] = changeToValue;
         });
