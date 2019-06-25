@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   ];
 
   Widget buildGrid(int index) {
-    final track = gridData[index];
+    final fromChange = gridData[index];
     Card card = Card(
       key: ValueKey(index),
       child: Container(
@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       ),
     );
     Draggable dragGridCard = LongPressDraggable(
-      data: track,
+      data: fromChange,
       maxSimultaneousDrags: 1,
       child: card,
       childWhenDragging: Opacity(
@@ -80,19 +80,18 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
 
     return DragTarget(
-      onWillAccept: (track) {
-        return gridData.indexOf(track) != index;
+      onWillAccept: (fromChange) {
+        return gridData.indexOf(fromChange) != index;
       },
-      onAccept: (track) {
+      onAccept: (fromChange) {
         setState(() {
-          var changefromValue = track;
+          var changefromValue = fromChange;
           var changeToValue = gridData[index];
-          int changeFromIndex = gridData.indexOf(track);
-          int changeToIndex = index;
-          gridData[changeToIndex] = changefromValue;
+          int changeFromIndex = gridData.indexOf(fromChange);
+          gridData[index] = changefromValue;
           gridData[changeFromIndex] = changeToValue;
         });
-        print('index after   $track $gridData]');
+        print('index after   $fromChange $gridData]');
       },
       builder:
           (BuildContext context, selectedData, List<dynamic> rejectedData) {
